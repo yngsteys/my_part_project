@@ -7,27 +7,29 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 
-QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
-}
-QT_END_NAMESPACE
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
-    void on_checkServerButton_clicked();      // Обработчик нажатия кнопки
-    void onReplyFinished(QNetworkReply* reply); // Обработчик ответа от сервера
+    void on_checkServerButton_clicked();   // Слот для проверки сервера
+    void on_sendMatrixButton_clicked();    // Слот для отправки матрицы
+    void onReplyFinished(QNetworkReply* reply); // Слот для обработки ответа от сервера
 
 private:
-    QPushButton *checkServerButton;
-    QLabel *statusLabel;
-    QNetworkAccessManager *networkManager;
+    QPushButton *checkServerButton;  // Кнопка для проверки сервера
+    QPushButton *sendMatrixButton;   // Кнопка для отправки матрицы
+    QLabel *statusLabel;             // Метка для отображения статуса
+    QLabel *lMatrixLabel;            // Метка для отображения матрицы L
+    QLabel *uMatrixLabel;            // Метка для отображения матрицы U
+    QLabel *pMatrixLabel;            // Метка для отображения матрицы P
+    QNetworkAccessManager *networkManager; // Менеджер сетевых запросов
+
+    QString matrixToString(const QJsonArray &matrix); // Объявляем функцию для преобразования матрицы в строку
 };
+
 #endif // MAINWINDOW_H
