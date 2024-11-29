@@ -1,11 +1,4 @@
 services:
-  server:
-    image: nginx
-    container_name: my_test_server
-    ports:
-      - "8080:80"
-    networks:
-      - my_network
 
   python_server:
     build: ./app
